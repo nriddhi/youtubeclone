@@ -41,29 +41,6 @@ app.use((err, req, res, next) => {
   });
 });
 
-// Create a middleware function to check for cookie errors
-function checkCookieError(req, res, next) {
-  // Store a reference to the original res.cookie method
-  const originalCookie = res.cookie;
-
-  // Override the res.cookie method with a custom implementation
-  res.cookie = function(name, value, options) {
-    try {
-      // Call the original res.cookie method
-      originalCookie.call(this, name, value, options);
-    } catch (error) {
-      // Log an error message to the console
-      console.error(`Failed to set cookie '${name}': ${error.message}`);
-    }
-  };
-
-  // Call the next middleware function
-  next();
-}
-
-// Use the checkCookieError middleware
-app.use(checkCookieError);
-
 app.listen(port, () => {
   connect();
   console.log("Connected to Server");

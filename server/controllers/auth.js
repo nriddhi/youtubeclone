@@ -36,14 +36,17 @@ export const signin = async (req, res, next) => {
     const token = jwt.sign({ id: user._id }, process.env.JWT);
     const { password, ...others } = user._doc;
     
-    res
-    .cookie("youtubeclone_token", token, {
+    try {
+      res.cookie("youtubeclone_token", token, {
       path: "/",
       httpOnly: true,
       sameSite: "none",
       secure:true
       });
-
+    } catch (error) {
+      console.error(`Failed to set cookie: ${error.message}`);
+      res.status(500).send('Internal Server Error');
+    }
       res.status(200)
       .json(others);
 
