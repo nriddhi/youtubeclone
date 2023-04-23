@@ -36,7 +36,7 @@ export const signin = async (req, res, next) => {
     const token = jwt.sign({ id: user._id }, process.env.JWT);
     const { password, ...others } = user._doc;
     res
-    .cookie("access_token", token, {
+    .cookie("youtubeclone_token", token, {
       httpOnly: true,
       });
       res.status(200)
@@ -53,7 +53,7 @@ export const googleAuth = async (req, res, next) => {
     if (user) {
       const token = jwt.sign({ id: user._id }, process.env.JWT);
       res
-        .cookie("access_token", token, {
+        .cookie("youtubeclone_token", token, {
         httpOnly: true,        
         })
         .status(200)
@@ -66,7 +66,7 @@ export const googleAuth = async (req, res, next) => {
       const savedUser = await newUser.save();
       const token = jwt.sign({ id: savedUser._id }, process.env.JWT);
       res
-        .cookie("access_token", token, {
+        .cookie("youtubeclone_token", token, {
           httpOnly: true,    
         })
         .status(200)
@@ -78,7 +78,7 @@ export const googleAuth = async (req, res, next) => {
 };
 
 export const logout = (req, res) => {
-  const token = req.cookies.access_token;
+  const token = req.cookies.youtubeclone_token;
   if (!token) {
     return res.status(400).json({ message: 'Token not Found' });
   }
@@ -86,7 +86,7 @@ export const logout = (req, res) => {
     if (err) {
       return res.status(403).json({ message: "Authentication failed" });
     }
-    res.clearCookie('access_token');
-    req.cookies['access_token'] = "";
+    res.clearCookie('youtubeclone_token');
+    req.cookies['youtubeclone_token'] = "";
     return res.status(200).json({code: 'logoutscs200', message: "Successfully Logged Out" });
 })};
