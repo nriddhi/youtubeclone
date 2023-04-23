@@ -41,9 +41,13 @@ export const signin = async (req, res, next) => {
       httpOnly: true,
       sameSite: "none",
       secure:true
-      })
-      .status(200)
+      });
+     
+      console.log('cookie:', res.get('Set-Cookie'));
+
+      res.status(200)
       .json(others);
+
   } catch (err) {
     next(err);
   }
