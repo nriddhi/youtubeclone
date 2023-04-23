@@ -35,10 +35,15 @@ export const signin = async (req, res, next) => {
 
     const token = jwt.sign({ id: user._id }, process.env.JWT);
     const { password, ...others } = user._doc;
+    
     res
     .cookie("youtubeclone_token", token, {
+      path: "/",
       httpOnly: true,
+      sameSite: "none",
+      secure:true
       });
+
       res.status(200)
       .json(others);
 
@@ -54,7 +59,10 @@ export const googleAuth = async (req, res, next) => {
       const token = jwt.sign({ id: user._id }, process.env.JWT);
       res
         .cookie("youtubeclone_token", token, {
-        httpOnly: true,        
+        path: "/",
+        httpOnly: true,
+        sameSite: "none",
+        secure:true
         })
         .status(200)
         .json(user._doc);
@@ -67,7 +75,10 @@ export const googleAuth = async (req, res, next) => {
       const token = jwt.sign({ id: savedUser._id }, process.env.JWT);
       res
         .cookie("youtubeclone_token", token, {
-          httpOnly: true,    
+          path: "/",
+          httpOnly: true,
+          sameSite: "none",
+          secure:true
         })
         .status(200)
         .json(savedUser._doc);

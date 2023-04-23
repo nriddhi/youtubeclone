@@ -23,16 +23,7 @@ app.use(cors({
 app.use(express.json());
 app.use(cookieParser());
 
-const connect = () => {
-  mongoose
-    .connect(process.env.MONGO_URL)
-    .then(() => {
-      console.log("Connected to DB");
-    })
-    .catch((err) => {
-      throw err;
-    });
-};
+
 
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
@@ -54,3 +45,14 @@ app.listen(port, () => {
   connect();
   console.log("Connected to Server");
 });
+
+const connect = () => {
+  mongoose
+    .connect(process.env.MONGO_URL)
+    .then(() => {
+      console.log("Connected to DB");
+    })
+    .catch((err) => {
+      throw err;
+    });
+};
