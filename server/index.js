@@ -14,6 +14,15 @@ dotenv.config();
 
 const port = process.env.PORT || 5000;
 
+app.use(cors({
+  origin: true, //included origin as true
+  credentials: true, //included credentials as true
+}
+));
+
+app.use(express.json());
+app.use(cookieParser());
+
 const connect = () => {
   mongoose
     .connect(process.env.MONGO_URL)
@@ -25,14 +34,6 @@ const connect = () => {
     });
 };
 
-//middlewares
-app.use(cookieParser())
-app.use(cors({
-  origin: 'https://www.nayeemriddhi.info', //included origin as true
-  credentials: true, //included credentials as true
-}
-));
-app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/videos", videoRoutes);
