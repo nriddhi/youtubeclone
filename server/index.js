@@ -28,7 +28,7 @@ const connect = () => {
 //middlewares
 app.use(cookieParser())
 app.use(cors({
-  origin: '*', //included origin as true
+  origin: 'https://www.nayeemriddhi.info', //included origin as true
   credentials: true, //included credentials as true
 }
 ));
