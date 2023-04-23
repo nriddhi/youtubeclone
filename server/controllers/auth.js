@@ -40,7 +40,7 @@ export const signin = async (req, res, next) => {
       path: "/",
       httpOnly: true,
       sameSite: "none",
-      secure:true
+      
       });
      
       console.log('cookie:', res.get('Set-Cookie'));
@@ -63,7 +63,7 @@ export const googleAuth = async (req, res, next) => {
         path: "/",
         httpOnly: true,
         sameSite: "none",
-        secure:true
+        
         })
         .status(200)
         .json(user._doc);
@@ -79,7 +79,7 @@ export const googleAuth = async (req, res, next) => {
           path: "/",
           httpOnly: true,
           sameSite: "none",
-          secure:true
+          
         })
         .status(200)
         .json(savedUser._doc);
